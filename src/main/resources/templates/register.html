@@ -1,0 +1,17 @@
+<!DOCTYPE html><html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}"><body><section>
+<div class="container auth-shell"><div class="row justify-content-center w-100"><div class="col-xl-11"><div class="row auth-panel g-0">
+<div class="col-lg-5 auth-visual"><img th:src="@{/img/ecom.jpg}" alt="Shopping"><div class="auth-copy"><h2>Start your shopping journey.</h2><p class="mb-0">Create an account and keep your products, cart and orders together.</p></div></div>
+<div class="col-lg-7 auth-form"><div class="mb-3"><span class="badge text-bg-primary mb-2">JOIN ECOMSTORE</span><h1 class="h2">Create your account</h1><p class="text-secondary">A few details and you're ready to shop.</p></div>
+<div th:if="${session.succMsg}" class="alert alert-success flash">[[${session.succMsg}]]<th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block></div>
+<div th:if="${session.errorMsg}" class="alert alert-danger flash">[[${session.errorMsg}]]<th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block></div>
+<form th:action="@{/saveUser}" enctype="multipart/form-data" id="userRegister" method="post">
+<div class="row g-3"><div class="col-md-6"><label class="form-label">Full name</label><input required class="form-control" name="name" type="text" placeholder="Your name"></div><div class="col-md-6"><label class="form-label">Mobile number</label><input required class="form-control" name="MobNo" type="tel" placeholder="10 digit mobile number"></div>
+<div class="col-12"><label class="form-label">Email</label><input required class="form-control" name="email" type="email" placeholder="you@example.com"></div>
+<div class="col-md-6"><label class="form-label">Address</label><input required class="form-control" name="address" type="text"></div><div class="col-md-6"><label class="form-label">City</label><input required class="form-control" name="city" type="text"></div>
+<div class="col-md-6"><label class="form-label">State</label><input required class="form-control" name="state" type="text"></div><div class="col-md-6"><label class="form-label">Pincode</label><input required class="form-control" name="pincode" type="text"></div>
+<div class="col-md-6"><label class="form-label">Password</label><input required class="form-control" name="password" type="password" id="pass"></div><div class="col-md-6"><label class="form-label">Confirm password</label><input required class="form-control" name="confirmpassword" type="password"></div>
+<div class="col-12"><label class="form-label">Profile image <span class="text-secondary fw-normal">(optional)</span></label><input class="form-control" name="img" type="file" accept="image/*"></div></div>
+<button type="submit" class="btn btn-primary w-100 py-2 mt-4">Create account <i class="fa-solid fa-user-plus ms-2"></i></button></form>
+<p class="text-center text-secondary mt-4 mb-0">Already have an account? <a th:href="@{/signin}" class="text-primary fw-bold text-decoration-none">Sign in</a></p>
+</div></div></div></div></div>
+</section></body></html>

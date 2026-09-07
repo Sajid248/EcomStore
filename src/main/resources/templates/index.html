@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+<body><section>
+<div class="container hero-shell">
+    <div id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel">
+        <div class="carousel-indicators"><button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button><button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button><button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button></div>
+        <div class="carousel-inner">
+            <div class="carousel-item active"><img th:src="@{/img/ecom1.jpg}" alt="Shopping"><div class="hero-copy"><span class="badge bg-light text-primary w-fit mb-3">SMART SHOPPING</span><h1>Everything you need, in one place.</h1><p>Discover useful products at simple prices with a smooth shopping experience.</p><a th:href="@{/products}" class="btn btn-primary align-self-start px-4 py-2">Shop now <i class="fa-solid fa-arrow-right ms-2"></i></a></div></div>
+            <div class="carousel-item"><img th:src="@{/img/ecom2.jpg}" alt="Latest products"><div class="hero-copy"><h1>Find your next favourite.</h1><p>Explore our latest products and discover something made for you.</p><a th:href="@{/products}" class="btn btn-light align-self-start px-4 py-2">Explore products</a></div></div>
+            <div class="carousel-item"><img th:src="@{/img/ecom3.png}" alt="Online store"><div class="hero-copy"><h1>Simple. Fast. Reliable.</h1><p>From product discovery to checkout, keep everything in one place.</p><a th:href="@{/register}" class="btn btn-primary align-self-start px-4 py-2">Join EcomStore</a></div></div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+    </div>
+</div>
+
+<section class="section-space bg-white"><div class="container">
+    <div class="d-flex justify-content-between align-items-end mb-4"><div><p class="text-primary fw-bold mb-1">SHOP BY CATEGORY</p><h2 class="section-title mb-1">Browse categories</h2><p class="section-subtitle mb-0">Start with a category and find products you love.</p></div><a th:href="@{/products}" class="btn btn-soft">View all</a></div>
+    <div class="row g-3" th:if="${category != null}"><div class="col-6 col-md-4 col-lg-2" th:each="c:${category}"><a class="category-card" th:href="@{/products(category=${c.name})}"><img class="category-image" th:src="@{'/img/category__img/'+${c.imageName}}" th:alt="${c.name}"><div class="category-name" th:text="${c.name}"></div></a></div></div>
+</div></section>
+
+<section class="section-space"><div class="container">
+    <div class="d-flex justify-content-between align-items-end mb-4"><div><p class="text-primary fw-bold mb-1">LATEST ARRIVALS</p><h2 class="section-title mb-1">Fresh picks for you</h2><p class="section-subtitle mb-0">Our newest products, ready to explore.</p></div><a th:href="@{/products}" class="btn btn-soft">Shop all</a></div>
+    <div class="row product-grid" th:if="${products != null}">
+        <div class="col-6 col-md-4 col-lg-3" th:each="p:${products}"><div class="product-card"><a th:href="@{'/product/'+${p.id}}" class="text-decoration-none"><div class="product-image-wrap"><span class="discount-badge" th:if="${p.discount>0}" th:text="${p.discount+'% OFF'}"></span><img class="product-image" th:src="@{'/img/product_img/'+${p.image}}" th:alt="${p.title}"></div><div class="product-body"><div class="product-title text-dark" th:text="${p.title}"></div><div class="mt-2"><span class="price-current"><th:block th:utext="${@commonServiceImpl.rupeeSign()}"></th:block> <span th:text="${p.discountPrice}"></span></span><span class="price-old ms-2" th:if="${p.discount>0}"><th:block th:utext="${@commonServiceImpl.rupeeSign()}"></th:block> <span th:text="${p.price}"></span></span></div></div></a></div></div>
+    </div>
+</div></section>
+</section></body></html>

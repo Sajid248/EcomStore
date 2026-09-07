@@ -1,0 +1,10 @@
+<!DOCTYPE html><html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}"><body><section>
+<div class="container auth-shell"><div class="row justify-content-center w-100"><div class="col-xl-10"><div class="row auth-panel g-0">
+<div class="col-md-6 auth-visual"><img th:src="@{/img/ecom.jpg}" alt="EcomStore"><div class="auth-copy"><h2>Welcome back.</h2><p class="mb-0">Sign in to manage your cart, orders and profile.</p></div></div>
+<div class="col-md-6 auth-form"><div class="mb-4"><span class="badge text-bg-primary mb-3">ECOMSTORE</span><h1 class="h2">Sign in to your account</h1><p class="text-secondary">Enter your email and password to continue.</p></div>
+<div th:if="${param.error}" class="alert alert-danger flash"><i class="fa-solid fa-circle-exclamation me-2"></i><th:block th:if="${session.SPRING_SECURITY_LAST_EXCEPTION!=null}">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</th:block></div>
+<div th:if="${param.logout}" class="alert alert-success flash">Logged out successfully.</div>
+<form th:action="@{/login}" method="post"><div class="mb-3"><label class="form-label">Email</label><input required class="form-control" name="username" type="email" placeholder="you@example.com"></div><div class="mb-3"><div class="d-flex justify-content-between"><label class="form-label">Password</label><a th:href="@{/forgot-password}" class="small text-primary text-decoration-none">Forgot password?</a></div><input required class="form-control" name="password" type="password" placeholder="••••••••"></div><button type="submit" class="btn btn-primary w-100 py-2">Sign in <i class="fa-solid fa-arrow-right ms-2"></i></button></form>
+<p class="text-center text-secondary mt-4 mb-0">Don't have an account? <a th:href="@{/register}" class="text-primary fw-bold text-decoration-none">Create one</a></p>
+</div></div></div></div></div>
+</section></body></html>
